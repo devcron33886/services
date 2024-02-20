@@ -1,0 +1,38 @@
+<?php
+
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('services', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->references(User::class)->constrained();
+            $table->foreignId('category_id')->references(Category::class)->constrained();
+            $table->string('title');
+            $table->string('slug');
+            $table->integer('price');
+            $table->string('image');
+            $table->text('description');
+            $table->string('status');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('services');
+    }
+};

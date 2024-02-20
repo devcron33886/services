@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -13,8 +13,9 @@ class CategoryController extends Controller
     public function __invoke($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
+
         return view('categories.show', [
-            'category' => $category
+            'category' => $category,
         ]);
     }
 }
